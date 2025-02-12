@@ -1,4 +1,4 @@
- <h2>Oppgaver</h2>
+<h2>Oppgaver</h2>
                 <ol>
                     <li>Studer koden og prøv å forstå mest mulig av hva som foregår. CSS er ikke viktig, men på
                         <tt>board</tt> brukes <tt>position: absolute</tt>
@@ -59,6 +59,5 @@
                             <li>I siste kolonne kan man bare legge til brikker som har slett høyrekant</li>
                         </ul>
                     </li>
-
                 </ol>
             `;
