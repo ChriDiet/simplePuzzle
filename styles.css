@@ -1,7 +1,7 @@
 #board {
    width: 30em;
    height: 30em;
-   background-color: rgb(230, 218, 173);
+   background-color: lightblue;
 }
 
 #board>div {
@@ -30,12 +30,12 @@
 
 .jigsaw1,
 .jigsaw1 span {
-   background-color: #4b5742;
+   background-color: #0284cf;
 }
 
 .jigsaw2,
 .jigsaw2 span {
-   background-color: #91a56a;
+   background-color: #00008B;
 }
 
 .text {
@@ -82,7 +82,7 @@
    -webkit-border-radius: 4em;
    -moz-border-radius: 4em;
    border-radius: 4em;
-   background-color: rgb(230, 218, 173);
+   background-color: lightblue;
 }
 
 .jigsaw1 .l,
@@ -95,5 +95,5 @@
    -webkit-border-radius: 4em;
    -moz-border-radius: 4em;
    border-radius: 4em;
-   background-color: rgb(230, 218, 173)
+   background-color: lightblue;
 }
