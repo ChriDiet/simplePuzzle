@@ -1,0 +1,66 @@
+        =====================================================================
+         notes:
+         try to do with MVC in mind;
+         addPuzzlePiece color param values {
+            color 1 === lightblue;
+            color 2 === darkblue;
+         }
+         addPuzzlePiece position params {
+            position keyNumber === +- 6
+         }
+        =====================================================================
+         model vars:
+         var tracking row movement;
+         var tracking col movment;
+         ? var tracking current color;
+        =====================================================================
+         task 1 {
+            define function addNormalPuzzlePieceToBoard;
+            1. must go from right to left;
+            2. when at end of row do nr 1 on second row;
+            3. repeat
+         }
+
+         task 2 {
+            add dynamic toLeft positioning;
+            start at rightmost pos, (24);
+            subtract 6 for each call to addPiceToBoard function until reached 0;
+         }
+
+         task 3 {
+            add dynamic column positioning;
+            when function called 5 times (reached 0) restart at row 0 add 6 to column;
+            check if function is called 5 times;
+            if true: restart leftPosition var to 24 and add 6 to topPosition;
+            if false: continue until leftPosition reach 0
+         }
+
+         task 4 {
+         flip color;
+              for each time function is called change color between 1 and 2;
+         }
+        =====================================================================
+         task 5 {
+            add rest of buttons with respective add to board functions;
+            modify as needed in call to addPuzzlePiece;
+            all add to board functions must respect the movment rules set in the first 4 tasks;
+            functions to add:
+            Normal brikke -- made in first 4 tasks
+            Slett toppkant - ellers normal
+            Slett høyrekant - ellers normal
+            Slett bunnkant - ellers normal
+            Slett venstrekant - ellers normal
+            Slett hjørne i topp og mot venstre - ellers normal
+            Slett hjørne i topp og mot høyre - ellers normal
+            Slett hjørne i bunn og mot venstre - ellers normal
+            Slett hjørne i bunn og mot høyre - ellers normal
+         }
+        =====================================================================
+        task 6 {
+            add rules to where pieces are allowed to be placed;
+            rules to add:
+            På første rad kan man bare legge til brikker som har slett topp
+            På siste rad kan man bare legge til brikker som har slett bunn
+            I første kolonne kan man bare legge til brikker som har slett venstrekant
+            I siste kolonne kan man bare legge til brikker som har slett høyrekant
+        }
