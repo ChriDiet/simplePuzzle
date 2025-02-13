@@ -35,7 +35,7 @@ function addPuzzlePiece(toId, hasTop, hasRight, hasBottom, hasLeft, onclick, col
          ${hasBottom ? `<span class="b"></span>` : ''}
          ${hasLeft ? `<span class="l"></span>` : ''}
       </div> 
-      `;
+   `;
 }
 
 function addPuzzlePieceToBoard(hasTop, hasRight, hasBottom, hasLeft) {
@@ -45,7 +45,6 @@ function addPuzzlePieceToBoard(hasTop, hasRight, hasBottom, hasLeft) {
    timesAdded++;
    colorSwitch();
    checkTimesAdded();
-
 }
 
 function addPuzzlePiecesToButton() {
@@ -56,11 +55,8 @@ function addPuzzlePiecesToButton() {
    addPuzzlePiece('buttons', true, true, true, false, 'evaluatePiece(true,true,true,false,5)', 1);
    addPuzzlePiece('buttons', false, true, true, false, 'evaluatePiece(false,true,true,false,4)', 2);
    addPuzzlePiece('buttons', false, false, true, true, 'evaluatePiece(false,false,true,true,3)', 1);
-
    addPuzzlePiece('buttons', true, true, false, false, 'evaluatePiece(true,true,false,false,2)', 2);
-
    addPuzzlePiece('buttons', true, false, false, true, 'evaluatePiece(true,false,false,true,1)', 1);
-
 }
 
 function checkTimesAdded() {
