@@ -13,34 +13,25 @@ addPuzzlePiecesToButton();
 // }
 
 
-function addPuzzlePiece(toId, hasTop, hasRight, hasBottom, hasLeft, onclick, color, leftPosition, topPosition) {
+function addPuzzlePiece(toId, hasTop, hasRight, hasBottom, hasLeft, onclick, color, leftPosition, topPosition,pieceId,pieceClass) {
    let style = '';
    if (leftPosition !== undefined) {
       style = `left: ${leftPosition + 0.5}em; top: ${topPosition + 0.5}em`;
    }
-
-   // return /*html*/ `
-   //    <div class="jigsaw${color}" onclick="${onclick}" style="${style}">
-   //       ${hasTop ? `<span class="t"></span>` : ''}
-   //       ${hasRight ? `<span class="r"></span>` : ''}
-   //       ${hasBottom ? `<span class="b"></span>` : ''}
-   //       ${hasLeft ? `<span class="l"></span>` : ''}
-   //    </div> 
-   // `;
    
    document.getElementById(toId).innerHTML += /*HTML*/`
-      <div class="jigsaw${color}" onclick="${onclick}" style="${style}">
-         ${hasTop ? `<span class="t"></span>` : ''}
-         ${hasRight ? `<span class="r"></span>` : ''}
-         ${hasBottom ? `<span class="b"></span>` : ''}
-         ${hasLeft ? `<span class="l"></span>` : ''}
+      <div id="${pieceId}" class="${pieceClass} jigsaw${color}" onclick="${onclick}" style="${style}">
+         ${hasTop ? `<span class="${pieceClass+'t'} t"></span>` : ''}
+         ${hasRight ? `<span class="${pieceClass+'r'} r"></span>` : ''}
+         ${hasBottom ? `<span class="${pieceClass+'b'} b"></span>` : ''}
+         ${hasLeft ? `<span class="${pieceClass+'l'} l"></span>` : ''}
       </div> 
    `;
 }
 
-function addPuzzlePieceToBoard(hasTop, hasRight, hasBottom, hasLeft) {
+function addPuzzlePieceToBoard(hasTop, hasRight, hasBottom, hasLeft,pieceId,pieceClass) {
    const changeVerticalPosBy = 6
-   addPuzzlePiece('board', hasTop, hasRight, hasBottom, hasLeft, '', jigsawColor, verticalPosition, horizontalPosition);
+   addPuzzlePiece('board', hasTop, hasRight, hasBottom, hasLeft, '', jigsawColor, verticalPosition, horizontalPosition,pieceId,pieceClass);
    verticalPosition -= changeVerticalPosBy;
    timesAdded++;
    colorSwitch();
@@ -96,11 +87,11 @@ function evaluatePiece(hasTop, hasRight, hasBottom, hasLeft,pieceId) {
 
 function evaluateFirstRow(hasTop, hasRight, hasBottom, hasLeft,pieceId) {
    if(verticalPosition === 24 && pieceId === 3)
-      addPuzzlePieceToBoard(hasTop, hasRight, hasBottom, hasLeft);
+      addPuzzlePieceToBoard(hasTop, hasRight, hasBottom, hasLeft,pieceId,'toBoard');
    if (verticalPosition < 24 && verticalPosition > 0 && pieceId == 8)
-      addPuzzlePieceToBoard(hasTop, hasRight, hasBottom, hasLeft);
+      addPuzzlePieceToBoard(hasTop, hasRight, hasBottom, hasLeft,pieceId,'toBoard');
    if (verticalPosition == 0 && pieceId == 4)
-      addPuzzlePieceToBoard(hasTop, hasRight, hasBottom, hasLeft);
+      addPuzzlePieceToBoard(hasTop, hasRight, hasBottom, hasLeft,pieceId,'toBoard');
 
 
    // if (verticalPosition == 24 && pieceId == 3) {
@@ -114,11 +105,11 @@ function evaluateFirstRow(hasTop, hasRight, hasBottom, hasLeft,pieceId) {
 
 function evaluateMiddleRows(hasTop, hasRight, hasBottom, hasLeft,pieceId) {
    if (verticalPosition == 24 && pieceId == 7) 
-      addPuzzlePieceToBoard(hasTop, hasRight, hasBottom, hasLeft);
+      addPuzzlePieceToBoard(hasTop, hasRight, hasBottom, hasLeft,pieceId,'toBoard');
    if (verticalPosition < 24 && verticalPosition > 0 && pieceId == 9)
-      addPuzzlePieceToBoard(hasTop, hasRight, hasBottom, hasLeft);
+      addPuzzlePieceToBoard(hasTop, hasRight, hasBottom, hasLeft,pieceId,'toBoard');
    if (verticalPosition == 0 && pieceId == 5)
-      addPuzzlePieceToBoard(hasTop, hasRight, hasBottom, hasLeft);
+      addPuzzlePieceToBoard(hasTop, hasRight, hasBottom, hasLeft,pieceId,'toBoard');
    
 
 
@@ -133,11 +124,11 @@ function evaluateMiddleRows(hasTop, hasRight, hasBottom, hasLeft,pieceId) {
 
 function evaluateBottomRow(hasTop, hasRight, hasBottom, hasLeft,pieceId) {
    if (verticalPosition == 24 && pieceId == 1)
-      addPuzzlePieceToBoard(hasTop, hasRight, hasBottom, hasLeft);
+      addPuzzlePieceToBoard(hasTop, hasRight, hasBottom, hasLeft,pieceId,'toBoard');
    if (verticalPosition < 24 && verticalPosition > 0 && pieceId == 6)
-      addPuzzlePieceToBoard(hasTop, hasRight, hasBottom, hasLeft);
+      addPuzzlePieceToBoard(hasTop, hasRight, hasBottom, hasLeft,pieceId,'toBoard');
    if (verticalPosition == 0 && pieceId == 2)
-      addPuzzlePieceToBoard(hasTop, hasRight, hasBottom, hasLeft);
+      addPuzzlePieceToBoard(hasTop, hasRight, hasBottom, hasLeft,pieceId,'toBoard');
 
 
 
