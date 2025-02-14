@@ -10,7 +10,7 @@
    grid-area: board;
 }
 
-.container {
+#app {
    display: grid;
    grid-template-columns: repeat(5, 230px);
    grid-template-rows: 75% 25%;
