@@ -7,13 +7,10 @@
 
       function updateView() {
          document.getElementById("app").innerHTML = /*html*/ `
-             
                  <div id="board">${puzzlePieces ?? ' '}</div>
                  <div id="buttons">${addPuzzlePiecesToButton()}</div>
-             
          `;         
      }
-
 
       function addPuzzlePiecesToButton() {
          return createPuzzlePieceHtml(true, true, true, true, 1, 9)
