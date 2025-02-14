@@ -2,12 +2,18 @@
       let horizontalPosition = 0;
       let timesAdded = 0;
       let jigsawColor = 2;
+      let puzzlePieces = "";
       
 
-      function drawPuzzle(hasTop, hasRight, hasBottom, hasLeft,jigsawColor, pieceId, pieceClass,verticalPosition, horizontalPosition) {
-         document.getElementById('buttons').innerHTML = addPuzzlePiecesToButton()
-         document.getElementById("board").innerHTML += createPuzzlePieceHtml(hasTop, hasRight, hasBottom, hasLeft,jigsawColor, pieceId, pieceClass,verticalPosition, horizontalPosition)
-      }
+      function updateView() {
+         document.getElementById("app").innerHTML = /*html*/ `
+             
+                 <div id="board">${puzzlePieces ?? ' '}</div>
+                 <div id="buttons">${addPuzzlePiecesToButton()}</div>
+             
+         `;         
+     }
+
 
       function addPuzzlePiecesToButton() {
          return createPuzzlePieceHtml(true, true, true, true, 1, 9)
@@ -74,7 +80,8 @@
 
       function addPuzzlePieceToBoard(hasTop, hasRight, hasBottom, hasLeft, pieceId, pieceClass) {
          const changeVerticalPosBy = 6
-         drawPuzzle(hasTop, hasRight, hasBottom, hasLeft, jigsawColor, pieceId, pieceClass,verticalPosition, horizontalPosition,);
+         puzzlePieces += createPuzzlePieceHtml(hasTop, hasRight, hasBottom, hasLeft, jigsawColor, pieceId, pieceClass,verticalPosition, horizontalPosition,);
+         updateView();
          verticalPosition -= changeVerticalPosBy;
          timesAdded++;
          colorSwitch();
