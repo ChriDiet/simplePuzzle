@@ -1,27 +1,34 @@
-let verticalPosition = 24;
-let horizontalPosition = 0;
-let timesAdded = 0;
+let horizontalPosition = 24;
+let verticalPosition = 0;
+let piecesAdded = 0;
 let jigsawColor = 2;
 let puzzlePieces = "";
+const maxPosition = 24;
+const minPosition = 0;
+const changePosBy = 6
 
 
 function updateView() {
    document.getElementById("app").innerHTML = /*html*/ `
       <div id="board">${puzzlePieces}</div>
-      <div id="buttons">${addPuzzlePiecesToButton()}</div>
+      <div id="buttons">${addPuzzlePiecesToButton()} 
+         <div>
+            <button onclick="reload()">Reset</button>
+         </div>
+      </div>
          `;
 }
 
 function addPuzzlePiecesToButton() {
-   return createPuzzlePieceHtml(true, true, true, true, 1, 9)
-      + createPuzzlePieceHtml(false, true, true, true, 2, 8)
-      + createPuzzlePieceHtml(true, false, true, true, 1, 7)
-      + createPuzzlePieceHtml(true, true, false, true, 2, 6)
-      + createPuzzlePieceHtml(true, true, true, false, 1, 5)
-      + createPuzzlePieceHtml(false, true, true, false, 2, 4)
-      + createPuzzlePieceHtml(false, false, true, true, 1, 3)
-      + createPuzzlePieceHtml(true, true, false, false, 2, 2)
-      + createPuzzlePieceHtml(true, false, false, true, 1, 1)
+   return createPuzzlePieceHtml(true, true, true, true, 1, 'centerPiece')
+      + createPuzzlePieceHtml(false, true, true, true, 2, 'topMiddlePiece')
+      + createPuzzlePieceHtml(true, false, true, true, 1, 'rightWallPiece')
+      + createPuzzlePieceHtml(true, true, false, true, 2, 'bottomMiddlePiece')
+      + createPuzzlePieceHtml(true, true, true, false, 1, 'leftWallPiece')
+      + createPuzzlePieceHtml(false, true, true, false, 2, 'topLeftCornerPiece')
+      + createPuzzlePieceHtml(false, false, true, true, 1, 'topRightCornerPiece')
+      + createPuzzlePieceHtml(true, true, false, false, 2, 'bottomLeftCornerPiece')
+      + createPuzzlePieceHtml(true, false, false, true, 1, 'bottomRightCornerPiece')
 }
 
 
@@ -41,64 +48,71 @@ function createPuzzlePieceHtml(hasTop, hasRight, hasBottom, hasLeft, color, piec
 }
 
 function evaluatePiece(pieceId) {
-   if (horizontalPosition === 0)
-      evaluateFirstRow(pieceId);
-   if (horizontalPosition < 24 && horizontalPosition > 0)
+   if (verticalPosition == minPosition)
+      evaluateTopRow(pieceId);
+   if (verticalPosition < maxPosition && verticalPosition > minPosition)
       evaluateMiddleRows(pieceId);
-   if (horizontalPosition === 24)
+   if (verticalPosition == maxPosition)
       evaluateBottomRow(pieceId);
 }
 
-function evaluateFirstRow(pieceId) {
-   if (verticalPosition === 24 && pieceId === 3)
+function evaluateTopRow(pieceId) {
+   if (horizontalPosition == maxPosition && pieceId == topRightCornerPiece)
       addPuzzlePieceToBoard(false, false, true, true, pieceId, 'toBoard')
-   if (verticalPosition < 24 && verticalPosition > 0 && pieceId == 8)
+   if (horizontalPosition < maxPosition && horizontalPosition > minPosition && pieceId == topMiddlePiece)
       addPuzzlePieceToBoard(false, true, true, true, pieceId, 'toBoard')
-   if (verticalPosition == 0 && pieceId == 4)
+   if (horizontalPosition == 0 && pieceId == topLeftCornerPiece)
       addPuzzlePieceToBoard(false, true, true, false, pieceId, 'toBoard')
 }
 
 function evaluateMiddleRows(pieceId) {
-   if (verticalPosition == 24 && pieceId == 7)
+   if (horizontalPosition == maxPosition && pieceId == rightWallPiece)
       addPuzzlePieceToBoard(true, false, true, true, pieceId, 'toBoard')
-   if (verticalPosition < 24 && verticalPosition > 0 && pieceId == 9)
+   if (horizontalPosition < maxPosition && horizontalPosition > minPosition && pieceId == centerPiece)
       addPuzzlePieceToBoard(true, true, true, true, pieceId, 'toBoard');
-   if (verticalPosition == 0 && pieceId == 5)
+   if (horizontalPosition == minPosition && pieceId == leftWallPiece)
       addPuzzlePieceToBoard(true, true, true, false, pieceId, 'toBoard')
 }
 
 function evaluateBottomRow(pieceId) {
-   if (verticalPosition == 24 && pieceId == 1)
+   if (horizontalPosition == maxPosition && pieceId == bottomRightCornerPiece)
       addPuzzlePieceToBoard(true, false, false, true, pieceId, 'toBoard')
-   if (verticalPosition < 24 && verticalPosition > 0 && pieceId == 6)
+   if (horizontalPosition < maxPosition && horizontalPosition > minPosition && pieceId == bottomMiddlePiece)
       addPuzzlePieceToBoard(true, true, false, true, pieceId, 'toBoard')
-   if (verticalPosition == 0 && pieceId == 2)
+   if (horizontalPosition == minPosition && pieceId == bottomLeftCornerPiece)
       addPuzzlePieceToBoard(true, true, false, false, pieceId, 'toBoard')
 }
 
 function addPuzzlePieceToBoard(hasTop, hasRight, hasBottom, hasLeft, pieceId, pieceClass) {
-   const changeVerticalPosBy = 6
-   puzzlePieces += createPuzzlePieceHtml(hasTop, hasRight, hasBottom, hasLeft, jigsawColor, pieceId, pieceClass, verticalPosition, horizontalPosition,);
+   puzzlePieces += createPuzzlePieceHtml(hasTop, hasRight, hasBottom, hasLeft, jigsawColor, pieceId, pieceClass, horizontalPosition, verticalPosition);
    updateView();
-   verticalPosition -= changeVerticalPosBy;
-   timesAdded++;
-   colorSwitch();
-   checkTimesAdded();
+   piecesAdded++
+   horizontalPosition -= changePosBy;
+   changePuzzlePieceColor();
+   checkPiecesAdded();
 }
 
-function colorSwitch() {
+function changePuzzlePieceColor() {
    jigsawColor === 1 ? jigsawColor = 2 : jigsawColor = 1;
 }
 
-function checkTimesAdded() {
-   const verticalLength = 5;
-   const changeHorizontalPosBy = 6;
-   const resetVerticalPos = 24;
-   const resetTimesAdded = 0;
+function checkPiecesAdded() {
+   const maxPiecesPerRow = 5;
 
-   if (timesAdded === verticalLength) {
-      verticalPosition = resetVerticalPos;
-      horizontalPosition += changeHorizontalPosBy;
-      timesAdded = resetTimesAdded;
-   }
+   if (piecesAdded === maxPiecesPerRow)
+      moveToNextRow()
 }
+
+function moveToNextRow () {
+   const resetPiecesAdded = 0;
+   const resetPos = maxPosition;
+
+   horizontalPosition = resetPos;
+   piecesAdded = resetPiecesAdded;
+   verticalPosition += changePosBy;
+}
+
+function reload() {
+   window.location.reload();
+}
+

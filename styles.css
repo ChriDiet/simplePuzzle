@@ -30,7 +30,7 @@
 }
 
 #buttons>div {
-   margin: 20px;
+   margin: 20px 16px 10px 15px;
 }
 
 .jigsaw1,
@@ -162,4 +162,14 @@
    -moz-border-radius: 4em;
    border-radius: 4em;
    background-color: #ecedd4;
+}
+
+button {
+   font-size: 12px;
+   width: 50px;
+   height: 45px;
+   border-radius: 5px;
+   border: 2px solid #929478;
+   background-color: #f2f3f0;
+   animation-duration: 10ms;
 }
